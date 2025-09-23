@@ -1,0 +1,14 @@
+@startuml
+actor CRM
+participant "Orders Queue" as queue
+participant "MES API" as api
+participant "MES DB" as db
+participant "Cache" as cache
+
+title Заполнение кеша
+
+CRM -> queue: Отправить сообщение о заказе со статусом Approved
+queue -> api: Получить и обработать сообщение
+api -> db: Сохранить заказ в БД
+api --> cache: Добавить запись в кеш
+@enduml

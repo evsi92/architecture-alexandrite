@@ -1,0 +1,16 @@
+@startuml
+actor Operator
+participant "MES UI" as ui
+participant "MES API" as api
+participant "Cache" as cache
+participant "MES DB" as db
+
+title Чтение списка заказов
+
+Operator -> ui: Открывает страницу дашборда
+ui -> api: Получить список активных заказов
+api -> cache: Получить список всех актуальных заказов из кеша
+cache --> api: Вернуть список
+api --> ui: Возвращает список
+ui --> Operator: Отобразить дашборд
+@enduml
